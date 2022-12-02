@@ -92,8 +92,7 @@
   }
   
   .flip-card-back {
-    
-    color: white;
+    color: black;
     transform: rotateY(180deg);
   }
 
