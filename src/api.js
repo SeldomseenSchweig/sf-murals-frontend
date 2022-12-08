@@ -166,7 +166,6 @@ return res
   // }
  
   static async update(username,data){
-    console.log(data)
     let res = this.request(`users/${username}`, data, 'patch')
     return res.user
 

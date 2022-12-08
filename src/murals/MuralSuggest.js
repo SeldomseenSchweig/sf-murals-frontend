@@ -14,9 +14,9 @@ const MuralSuggest =({suggest})=>{
         return <Redirect to="/"/>
     }
     const INITIAL_STATE = {
-        artist:"2",
-        street_address:"2",
-        img:"2",
+        artist:"",
+        street_address:"",
+        img:"",
     }
     const [formData, setFormData] = useState([INITIAL_STATE])
     const handleChange = (e) =>{

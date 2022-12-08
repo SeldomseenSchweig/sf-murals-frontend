@@ -1,13 +1,15 @@
 import React, {useContext, useState,useEffect} from "react";
 import { Redirect } from "react-router-dom";
 import sfMuralsApi from "./api";
+import { useHistory } from "react-router-dom";
 import CurrentUserContext from "./CurrentUserContext";
 
 
-const ProfileEditForm = () =>{
+const ProfileEditForm = ({setCurrentUser}) =>{
 
 
     const user = useContext(CurrentUserContext)
+    
     const [formData, setFormData] = useState(
         { email:"",
         firstName:"",
@@ -51,22 +53,26 @@ const ProfileEditForm = () =>{
         }))
     }
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
- 
+    const handleSubmit = () =>{
+        
+
         let profileData = {
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
           };
          let username = user.currentUser.user.username
-         sfMuralsApi.update(username, profileData)
+          sfMuralsApi.update(username, profileData)
+
+
+         
             
         setFormData({ 
-            email:"",
-        firstName:"",
-        lastName:""  ,
+            email:user.currentUser.user.email,
+        firstName:user.currentUser.user.firstName,
+        lastName:user.currentUser.user.lastName,
         });
+        
 
     }
 

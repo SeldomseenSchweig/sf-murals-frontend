@@ -84,21 +84,24 @@ async function suggest (values){
 }
 
 
+console.log()
 
 useEffect(() => {
 
 
     async function getSuggestedMurals() {
         try {
-          if(user.isAdmin){
+          
+          
             let murals = await sfMuralsApi.getSuggestedMurals();
+            
             
             setSuggestedMurals(murals);    
 
-          }
+          
 
         } catch (error) {
-            
+            console.log(error)
             
         }
 
@@ -108,8 +111,6 @@ useEffect(() => {
     getSuggestedMurals();
 
   }, [token]);
-
-
   
 
   async function deny(id){
@@ -143,7 +144,7 @@ useEffect(() => {
                <Murals values={{murals,setMurals}}/>
             </Route>
             <Route exact path="/profile">
-              <ProfileEditForm />
+              <ProfileEditForm values={{setCurrentUser}}/>
             </Route>
             <Route exact path="/signup">
               <SignupForm register={register} errors={errors} setErrors={setErrors}/>

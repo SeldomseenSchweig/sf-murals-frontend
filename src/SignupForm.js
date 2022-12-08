@@ -15,7 +15,6 @@ const Signup = ({register, errors,setErrors}) =>{
     if(currentUser){
         return <Redirect to="/"/>
     }
-    const history = useHistory()
     
 
     const initialState = {
