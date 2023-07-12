@@ -8,6 +8,7 @@
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "jsonwebtoken": "^8.5.1",
+    "npm": "^9.8.0",
     "pg": "^8.8.0",
     "react": "^16.6.0",
     "react-bootstrap": "^2.6.0",
