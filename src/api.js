@@ -15,7 +15,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class sfMuralsApi {
   // the token for interactive with the API will be stored here.
-  //There are three routes, to the database, the SF Mural API and the Googles maps API
+  //There are two routes the database and the SF Mural API 
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
@@ -24,10 +24,10 @@ class sfMuralsApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${sfMuralsApi.token}`};
+    const headers = { Authorization: `Bearer ${sfMuralsApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -37,117 +37,108 @@ class sfMuralsApi {
       throw Array.isArray(message) ? message : [message];
     }
   }
-  
-
 
   // Individual API routes
 
-
-
-
-
   /** Get details on a suggested murals. */
 
-  static async getSuggestedMurals(){
+  static async getSuggestedMurals() {
+
+
+    let res = await this.request(`murals/adminMurals`);
+
+    return res;
+  }
+
+  static async getMurals(filter) {
     let data = {}
-    if (data){
-      
+    console.log(filter)
+    if (filter) {
+      data = { street_address: filter }
+
     }
 
-  let res = await this.request(`murals/adminMurals`);
-  
-  return res;
-}
+    let res = await this.request(`murals`, data);
 
-    static async getMurals(filter){
-      let data = {}
-      console.log(filter)
-      if (filter){
-        data = {street_address:filter}
-        
-      }
-
-    let res = await this.request(`murals`,data);
-    
     return res;
   }
 
 
   // users suggest murals to add to site
 
-  static async suggest(values){
+  static async suggest(values) {
 
     let data = {
-      artist:values.artist,
-      street_address:values.street_address,
-      img:values.img,
-      user_id:values.user_id
+      artist: values.artist,
+      street_address: values.street_address,
+      img: values.img,
+      user_id: values.user_id
     }
 
-  let res = await this.request(`murals/muralSuggest`,data,'post' );
-  
-  return res;
-}
+    let res = await this.request(`murals/muralSuggest`, data, 'post');
 
-// admin denys suggested mural, deletes from suggestedMurals table
+    return res;
+  }
 
-static async deleteSuggested(id){
-  let data = {}
+  // admin denys suggested mural, deletes from suggestedMurals table
 
-  await this.request(`murals/${id}`,data,'delete')
-}
+  static async deleteSuggested(id) {
+    let data = {}
 
-static async approve(values){
-    
-  let data = {
-    artist:values.artist,
-    street_address:values.address,
-    img:values.img,
+    await this.request(`murals/${id}`, data, 'delete')
+  }
+
+  static async approve(values) {
+
+    let data = {
+      artist: values.artist,
+      street_address: values.address,
+      img: values.img,
+
+    }
+
+    let res = this.request('murals', data, 'post')
+    return res
+  }
+
+
+
+
+
+
+  /**register website */
+
+  static async register(values) {
+
+    let data = {
+      username: values.username,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email
+    }
+
+    let res = this.request('auth/register', data, 'post')
+    return res
+  }
+
+  /** login. */
+
+  static async login({ username, password }) {
+
+
+    let data = {
+      username: username,
+      password: password,
+    }
+
+    let res = this.request('auth/token', data, 'post')
+
+    return res
 
   }
 
-  let res = this.request('murals', data, 'post' )
-return res  
-}
-
-
-
-
-
-
-    /**register website */
-
-  static async register(values){
-    
-    let data = {
-      username:values.username,
-      password:values.password,
-      firstName:values.firstName,
-      lastName:values.lastName,
-      email:values.email
-    }
-
-    let res = this.request('auth/register', data, 'post' )
-  return res  
-}
-
-    /** login. */
-
-  static async login({username,password}){
-    
-
-    let data = {
-      username:username,
-      password:password,
-    }
-    
-      let res = this.request('auth/token', data, 'post' )
-      
-      return res
-      
-  }
-
-  static async getUser(testuser){
+  static async getUser(testuser) {
 
     let res = this.request(`users/${testuser}`)
 
@@ -164,8 +155,8 @@ return res
   //   return res
 
   // }
- 
-  static async update(username,data){
+
+  static async update(username, data) {
     let res = this.request(`users/${username}`, data, 'patch')
     return res.user
 

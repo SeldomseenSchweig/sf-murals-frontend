@@ -5,17 +5,17 @@ import { Navbar, Nav, NavItem } from "reactstrap";
 import CurrentUserContext from "../CurrentUserContext";
 
 
-function NavBar({logout, suggestedMurals}) {
+function NavBar({ logout, suggestedMurals }) {
 
-  const {currentUser} = useContext(CurrentUserContext)
-    
-  
+  const { currentUser } = useContext(CurrentUserContext)
+
+
   return (
     <div>
 
       {!currentUser ? <Navbar expand="md">
         <NavLink exact to="/" className="navbar-brand">
-         SF Murals
+          SF Murals
         </NavLink>
 
         <Nav className="ml-auto" cl navbar>
@@ -28,35 +28,35 @@ function NavBar({logout, suggestedMurals}) {
         </Nav>
       </Navbar> :
 
-      <Navbar expand="md"><NavLink exact to="/" className="navbar-brand">
-         SF Murals
+        <Navbar expand="md"><NavLink exact to="/" className="navbar-brand">
+          SF Murals
         </NavLink>
 
-        <Nav className="ml-auto" navbar>
-        {!currentUser.user.isAdmin? 
+          <Nav className="ml-auto" navbar>
+            {!currentUser.user.isAdmin ?
               <NavItem>
                 <NavLink to="/muralSuggest">Suggest a Mural</NavLink>
               </NavItem>
-              :          
+              :
               <NavItem>
-                  <NavLink to="/adminMurals"> Currently Suggested Murals ({suggestedMurals ? suggestedMurals.length: "" })</NavLink>
-              </NavItem> 
-          }
+                <NavLink to="/adminMurals"> Currently Suggested Murals ({suggestedMurals ? suggestedMurals.length : ""})</NavLink>
+              </NavItem>
+            }
 
-          <NavItem>
-            <NavLink to="/murals">All Murals</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/profile"> Profile</NavLink>
-          </NavItem>  
-          <NavItem onClick={logout}> 
-             <NavLink to="/"> Log out of { !currentUser ? "" : currentUser.user.username} 
-            </NavLink>
-          </NavItem>
+            <NavItem>
+              <NavLink to="/murals">All Murals</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/profile"> Profile</NavLink>
+            </NavItem>
+            <NavItem onClick={logout}>
+              <NavLink to="/"> Log out of {!currentUser ? "" : currentUser.user.username}
+              </NavLink>
+            </NavItem>
 
           </Nav>
-          </Navbar>
-}
+        </Navbar>
+      }
 
     </div>
   );
