@@ -20,8 +20,9 @@
     "reactstrap": "^9.1.5"
   },
   "scripts": {
-    "start":"npm run start-fe",
-    "build": "react-scripts build",
+    
+    "start": "concurrently \"npm run start-fe\" \"cd ../backend && npm start\" ",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-fe": "react-scripts start",
