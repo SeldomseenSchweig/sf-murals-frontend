@@ -2,6 +2,8 @@ import axios from "axios";
 // import { apiKey } from "../apiKey";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+
+console.log("This should be th base URL: ",process.env.REACT_APP_BASE_URL)
 // const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?`
 
 
