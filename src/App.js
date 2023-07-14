@@ -46,6 +46,7 @@ function App() {
     try {
       let new_token = await sfMuralsApi.register(values);
       setToken(new_token)
+      return null
 
     } catch (error) {
 
