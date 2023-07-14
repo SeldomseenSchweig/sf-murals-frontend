@@ -119,9 +119,9 @@ class sfMuralsApi {
       lastName: values.lastName,
       email: values.email
     }
-
+    console.log("Data from frontend Register:  ***********  ",data)
     let res = this.request('auth/register', data, 'post')
-    console.log("Data from register:  ***********",res)
+    
     return res
   }
 
