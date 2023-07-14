@@ -114,17 +114,26 @@ class sfMuralsApi {
   /**register website */
 
   static async register(values) {
-
-    let data = {
-      username: values.username,
-      password: values.password,
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email
+    try {
+      let data = {
+        username: values.username,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email
+      }
+      // let res = this.request('auth/register', data, 'post')
+      // console.log(res)
+      // return res
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, data);
+      return response.data.token;
+      
+    } catch (error) {
+      console.error("Error during registration:", error);
+      throw error;
+      
     }
-    let res = this.request('auth/register', data, 'post')
-    console.log(res)
-    return res
+
   }
 
   /** login. */
