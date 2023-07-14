@@ -36,6 +36,8 @@ class sfMuralsApi {
     } catch (err) {
       console.log(`url: ${url}, method: ${method}, data: ${data}, method: ${method}, headers:  ${headers}`)
       console.error("API Error:", err.response);
+      console.error("API Error just error:", err);
+
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
