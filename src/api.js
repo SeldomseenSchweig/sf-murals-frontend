@@ -121,6 +121,7 @@ class sfMuralsApi {
     }
 
     let res = this.request('auth/register', data, 'post')
+    console.log("Data from register:  ***********",res)
     return res
   }
 
