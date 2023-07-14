@@ -55,11 +55,6 @@ function App() {
 
     }
 
-
-
-
-
-
   }
   async function login(values) {
     let res = await sfMuralsApi.login(values);

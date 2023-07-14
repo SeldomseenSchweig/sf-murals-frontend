@@ -30,6 +30,7 @@ class sfMuralsApi {
       : {};
 
     try {
+      url = 'postgres://ebpgzdfm:yk11OENFv5G9lBYQdRn1tdTtsStaQ0Za@mahmud.db.elephantsql.com/ebpgzdfm'
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       console.error("API Error:", err.response);
