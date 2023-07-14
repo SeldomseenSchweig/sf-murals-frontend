@@ -122,8 +122,8 @@ class sfMuralsApi {
       lastName: values.lastName,
       email: values.email
     }
-    let res = await this.request('auth/register', data, 'post')
-    
+    let res = this.request('auth/register', data, 'post')
+    console.log(res)
     return res
   }
 
