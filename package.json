@@ -1,5 +1,5 @@
 {
-  "name": "sfMurals",
+  "name": "sf-murals",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,8 +20,8 @@
     "reactstrap": "^9.1.5"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-fe\" \"cd ../backend && npm start\" ",
-    "build": "react-scripts  build",
+    "start": "concurrently \"NODE_OPTIONS=--openssl-legacy-provider npm run start-fe\" \"cd ../backend && npm start\" ",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider && react-scripts  build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-fe": "react-scripts  start",
