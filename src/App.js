@@ -41,7 +41,7 @@ function App() {
     }
 
   }
-    , [token.token]);
+    , [token]);
 
   async function register(values) {
     try {
