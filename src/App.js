@@ -33,6 +33,7 @@ function App() {
   useEffect(() => {
     if (token && token.token) {
       let info = jwt.decode(token.token)
+      console.log("Token INFO+++++++", token)
       sfMuralsApi.token = token.token
       getUser(info.username);
 
@@ -40,7 +41,7 @@ function App() {
     }
 
   }
-    , [token]);
+    , [token.token]);
 
   async function register(values) {
     try {
