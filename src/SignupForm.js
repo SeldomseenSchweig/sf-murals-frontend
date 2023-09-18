@@ -1,6 +1,5 @@
 import { Alert } from "reactstrap";
 import React, { useState, useContext } from "react";
-import { useHistory } from 'react-router-dom';
 import { Redirect } from "react-router-dom";
 import CurrentUserContext from "./CurrentUserContext";
 

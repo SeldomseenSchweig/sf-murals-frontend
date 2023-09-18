@@ -15,7 +15,6 @@ import jwt from "jsonwebtoken";
 import CurrentUserContext from "./CurrentUserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { user } from "pg/lib/defaults";
 
 
 export const TOKEN_STORAGE_ID = "sfMurals-token";

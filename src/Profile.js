@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import sfMuralsApi from "./api";
-import { useHistory } from "react-router-dom";
 import CurrentUserContext from "./CurrentUserContext";
 
 

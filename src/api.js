@@ -25,7 +25,8 @@ class sfMuralsApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
-    console.log("This shold be url: ",url)
+    console.log("This shold be url: ",url, "and token:,", sfMuralsApi.token)
+
     const headers = { Authorization: `Bearer ${sfMuralsApi.token}` };
     const params = (method === "get")
       ? data
@@ -34,10 +35,11 @@ class sfMuralsApi {
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
+      
       console.log(`url: ${url}, method: ${method}, data: ${data}, method: ${method}, headers:  ${headers}`)
       console.error("API Error:", err.response);
       console.error("API Error just error:", err);
-
+      if( !err.response.data) throw console.error("Something went wrong");
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
