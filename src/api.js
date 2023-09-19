@@ -34,7 +34,6 @@ class sfMuralsApi {
       : {};
 
     try {
-      console.log("Checking....")
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       
@@ -142,7 +141,7 @@ class sfMuralsApi {
 
   static async login({ username, password }) {
 
-
+    console.log("Checking Log In.....", username,password);
     let data = {
       username: username,
       password: password,
