@@ -148,6 +148,7 @@ class sfMuralsApi {
     }
 
     let res = this.request('auth/token', data, 'post')
+    console.log(res)
 
     return res
 
