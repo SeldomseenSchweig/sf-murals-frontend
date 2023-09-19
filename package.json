@@ -20,8 +20,8 @@
     "reactstrap": "^9.1.5"
   },
   "scripts": {
-    "start": "NODE_OPTIONS=--openssl-legacy-provider npm run start-fe",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider && react-scripts  build",
+    "start": "concurrently \"NODE_OPTIONS=--openssl-legacy-provider npm run start-fe\" \"cd ../backend && npm start\" ",
+    "build": "react-scripts  build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-fe": "react-scripts  start",
