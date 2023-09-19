@@ -34,12 +34,13 @@ class sfMuralsApi {
       : {};
 
     try {
-      return (await axios({ url, method, data, params, headers })).data;
+      let data = (await axios({ url, method, data, params, headers })).data
+      console.log("This is the data returned from the call: ",data)
+      return data;
     } catch (err) {
       
       console.log(`url: ${url}, method: ${method}, data: ${data}, method: ${method}, headers:  ${headers}`)
-      console.error("API Error:", err.response);
-      console.error("API Error just error:", err);
+
       if( !err.response.data) throw console.error("Something went wrong");
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
