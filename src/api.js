@@ -34,9 +34,9 @@ class sfMuralsApi {
       : {};
 
     try {
-      let data = (await axios({ url, method, data, params, headers })).data
+      let data = (await axios({ url, method, data, params, headers }))
       console.log("This is the data returned from the call: ",data)
-      return data;
+      return data.data;
     } catch (err) {
       
       console.log(`url: ${url}, method: ${method}, data: ${data}, method: ${method}, headers:  ${headers}`)
