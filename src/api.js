@@ -146,7 +146,7 @@ class sfMuralsApi {
       password: password,
     }
 
-    let res = this.request('auth/token', data, 'post')
+    let res = await this.request('auth/token', data, 'post')
     console.log(res)
 
     return res
