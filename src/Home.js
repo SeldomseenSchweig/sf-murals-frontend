@@ -65,7 +65,7 @@ function Home() {
             ) : (
               <div className="buttonGroup">
                 <Link to="/signup">
-                  <button className="btn btn-primary" style={styles.button}>
+                  <button className="btn btn-primary">
                     Sign Up
                   </button>
                 </Link>
