@@ -59,8 +59,10 @@ function App() {
   }
   async function login(values) {
     let res = await sfMuralsApi.login(values);
-    console.log(res);
+    
     setToken(res)
+    return true
+    
 
   }
   async function getUser(username) {
