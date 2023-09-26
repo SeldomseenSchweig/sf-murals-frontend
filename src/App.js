@@ -87,8 +87,6 @@ function App() {
         let murals = await sfMuralsApi.getSuggestedMurals();
         setSuggestedMurals(murals);
       } catch (error) {
-        console.log(error)
-
       }
     }
     getSuggestedMurals();
