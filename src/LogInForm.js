@@ -38,8 +38,8 @@ const LoginForm = ({ login }) => {
             }
         } catch (error) {
             // Handle any errors that occur during login
-            console.error(error);
-            alert('An error occurred during login. Please try again later.');
+            
+            alert(`${error}`);
         }
     }
     

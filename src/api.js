@@ -143,7 +143,7 @@ class sfMuralsApi {
     }
 
     let res = await this.request('auth/token', data, 'post')
-
+    console.log(res, "API call")
     return res
 
   }
