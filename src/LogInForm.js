@@ -23,14 +23,30 @@ const LoginForm = ({ login }) => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { username, password } = formData
-        let res = login({ username, password });
-        console.log(res, "AFTER LOGIN+++++++++++++++++")
-        history.push('/')
-
+        const { username, password } = formData;
+        
+        // Assuming your login function returns a promise that resolves to a boolean
+        try {
+            let loginSuccess = await login({ username, password });
+            
+            if (loginSuccess) {
+                history.push('/');
+            } else {
+                alert('Incorrect username or password. Please try again.');
+            }
+        } catch (error) {
+            // Handle any errors that occur during login
+            console.error(error);
+            alert('An error occurred during login. Please try again later.');
+        }
     }
+    
+    
+    
+    
+    
 
 
     return (

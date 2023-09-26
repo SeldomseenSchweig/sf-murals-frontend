@@ -126,7 +126,6 @@ class sfMuralsApi {
         email: values.email
       }
       let res = await this.request('auth/register', data, 'post')
-      console.log(res)
       return res
       
     } catch (error) {
@@ -140,14 +139,12 @@ class sfMuralsApi {
 
   static async login({ username, password }) {
 
-    console.log("Checking Log In.....", username,password);
     let data = {
       username: username,
       password: password,
     }
 
     let res = await this.request('auth/token', data, 'post')
-    console.log(res)
 
     return res
 
@@ -162,14 +159,7 @@ class sfMuralsApi {
   }
 
 
-  // static async apply(){
-  //   // const {username, jobId} = values;
-  //   const data = {username:username, id:jobId}
 
-  //   let res = this.request(`users/${username}/jobs/${jobId}`, data, 'post')
-  //   return res
-
-  // }
 
   static async update(username, data) {
     let res = this.request(`users/${username}`, data, 'patch')
