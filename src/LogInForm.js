@@ -26,7 +26,8 @@ const LoginForm = ({ login }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { username, password } = formData
-        login({ username, password });
+        let res = login({ username, password });
+        console.log(res, "AFTER LOGIN+++++++++++++++++")
         history.push('/')
 
     }
