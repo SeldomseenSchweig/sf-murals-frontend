@@ -30,7 +30,7 @@ const LoginForm = ({ login }) => {
         // Assuming your login function returns a promise that resolves to a boolean
         try {
             let loginSuccess = await login({ username, password });
-            
+            console.log("login success",loginSuccess)
             if (loginSuccess) {
                 history.push('/');
             } else {
