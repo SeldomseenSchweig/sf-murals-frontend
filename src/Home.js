@@ -55,22 +55,22 @@ function Home() {
 
   return (
     <section className="col-md-14">
-      <Card style={styles.card}>
+      <Card>
         <CardBody className="text-center">
-          <CardTitle style={styles.title}>
-            <h1 style={styles.header}>SF Murals</h1>
-            <h3 style={styles.subTitle}>Find The Mural You Are Looking For</h3>
+          <CardTitle>
+            <h1 >SF Murals</h1>
+            <h3 className="subtitle">Find The Mural You Are Looking For</h3>
             {user.currentUser ? (
               <h2>Welcome Back {user.currentUser.user.firstName}</h2>
             ) : (
-              <div style={styles.buttonGroup}>
+              <div className="buttonGroup">
                 <Link to="/signup">
                   <button className="btn btn-primary" style={styles.button}>
                     Sign Up
                   </button>
                 </Link>
                 <Link to="/login">
-                  <button className="btn btn-primary" style={styles.button}>
+                  <button className="btn btn-primary">
                     Login
                   </button>
                 </Link>
