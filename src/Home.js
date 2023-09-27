@@ -55,7 +55,7 @@ function Home() {
             {user.currentUser ? (
               <h2>Welcome Back {user.currentUser.user.firstName}</h2>
             ) : (
-              <div style={styles.buttonGroup}>
+              <div className="buttonGroup">
                 <Link to="/signup">
                   <button className="btn btn-primary button">
                     Sign Up
