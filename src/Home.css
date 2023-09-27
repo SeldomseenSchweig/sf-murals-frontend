@@ -6,6 +6,7 @@
   
   /* New styles for the enhanced home page */
   .card {
+    background-image: url(./mural.jpg);
     background-size: cover;
     color: white;
   }
