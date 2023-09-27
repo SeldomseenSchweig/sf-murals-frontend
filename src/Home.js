@@ -13,56 +13,56 @@ import muralImage from './mural.jpg';
 function Home() {
   const user = useContext(CurrentUserContext);
 
-  const styles = {
-    card: {
-      backgroundImage: `url(${muralImage})`,
-      backgroundSize: "cover",
-      color: "white",
-    },
-    title: {
-      backgroundColor: "rgba(0, 0, 0, 0.7)",
-      padding: "20px",
-      borderRadius: "10px",
-    },
-    header: {
-      fontSize: "3rem",
-      fontWeight: "bold",
-      marginBottom: "20px",
-    },
-    subTitle: {
-      fontSize: "1.5rem",
-      marginBottom: "30px",
-    },
-    buttonGroup: {
-      display: "flex",
-      justifyContent: "center",
-    },
-    button: {
-      margin: "0 10px",
-      padding: "10px 20px",
-      fontSize: "1.2rem",
-      fontWeight: "bold",
-    },
-  };
+  // const styles = {
+  //   card: {
+  //     backgroundImage: `url(${muralImage})`,
+  //     backgroundSize: "cover",
+  //     color: "white",
+  //   },
+  //   title: {
+  //     backgroundColor: "rgba(0, 0, 0, 0.7)",
+  //     padding: "20px",
+  //     borderRadius: "10px",
+  //   },
+  //   header: {
+  //     fontSize: "3rem",
+  //     fontWeight: "bold",
+  //     marginBottom: "20px",
+  //   },
+  //   subTitle: {
+  //     fontSize: "1.5rem",
+  //     marginBottom: "30px",
+  //   },
+  //   buttonGroup: {
+  //     display: "flex",
+  //     justifyContent: "center",
+  //   },
+  //   button: {
+  //     margin: "0 10px",
+  //     padding: "10px 20px",
+  //     fontSize: "1.2rem",
+  //     fontWeight: "bold",
+  //   },
+  // };
 
   return (
     <section className="col-md-14">
-      <Card style={styles.card}>
+      <Card className="card">
         <CardBody className="text-center">
-          <CardTitle style={styles.title}>
-            <h1 style={styles.header}>SF Murals</h1>
-            <h3 style={styles.subTitle}>Find The Mural You Are Looking For</h3>
+          <CardTitle className="title">
+            <h1 className="header">SF Murals</h1>
+            <h3 className="subTitle">Find The Mural You Are Looking For</h3>
             {user.currentUser ? (
               <h2>Welcome Back {user.currentUser.user.firstName}</h2>
             ) : (
               <div style={styles.buttonGroup}>
                 <Link to="/signup">
-                  <button className="btn btn-primary" style={styles.button}>
+                  <button className="btn btn-primary button">
                     Sign Up
                   </button>
                 </Link>
                 <Link to="/login">
-                  <button className="btn btn-primary" style={styles.button}>
+                  <button className="btn btn-primary button">
                     Login
                   </button>
                 </Link>
