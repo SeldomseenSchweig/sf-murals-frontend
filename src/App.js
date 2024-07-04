@@ -16,99 +16,75 @@ import CurrentUserContext from "./CurrentUserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 export const TOKEN_STORAGE_ID = "sfMurals-token";
 
-
 function App() {
-
   const [currentUser, setCurrentUser] = useState("");
+
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [suggestedMurals, setSuggestedMurals] = useState([]);
-  const [murals, setMurals] = useState([])
-  const [errors, setErrors] = useState({})
-
+  const [murals, setMurals] = useState([]);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (token && token.token) {
-      let info = jwt.decode(token.token)
-      sfMuralsApi.token = token.token
+      let info = jwt.decode(token.token);
+      sfMuralsApi.token = token.token;
       getUser(info.username);
-
-
     }
-
-  }
-    , [token]);
+  }, [token]);
 
   async function register(values) {
     try {
       let new_token = await sfMuralsApi.register(values);
-      setToken(new_token)
-      
-      return null
+      setToken(new_token);
 
+      return null;
     } catch (error) {
-
-      return error
-
-
-
+      return error;
     }
-
   }
   async function login(values) {
     let res = await sfMuralsApi.login(values);
-    
-    setToken(res)
-    return true
-    
 
+    setToken(res);
+    return true;
   }
   async function getUser(username) {
     let user = await sfMuralsApi.getUser(username);
-    setCurrentUser(user)
+    setCurrentUser(user);
   }
 
   function logout() {
-
     setCurrentUser(null);
     setToken(null);
-
   }
   async function suggest(values) {
     await sfMuralsApi.suggest(values);
   }
 
   useEffect(() => {
-
     async function getSuggestedMurals() {
       try {
         let murals = await sfMuralsApi.getSuggestedMurals();
         setSuggestedMurals(murals);
-      } catch (error) {
-      }
+      } catch (error) {}
     }
     getSuggestedMurals();
   }, [token]);
 
-
   async function deny(id) {
-    await sfMuralsApi.deleteSuggested(id)
+    await sfMuralsApi.deleteSuggested(id);
     let newMurals = await sfMuralsApi.getSuggestedMurals();
-    setSuggestedMurals(newMurals)
+    setSuggestedMurals(newMurals);
   }
 
   async function approve(values) {
     await sfMuralsApi.approve(values);
-    await sfMuralsApi.deleteSuggested(values.id)
+    await sfMuralsApi.deleteSuggested(values.id);
     let newMurals = await sfMuralsApi.getSuggestedMurals();
-    setSuggestedMurals(newMurals)
+    setSuggestedMurals(newMurals);
   }
-
-
-
-
 
   return (
     <div className="App">
@@ -127,7 +103,11 @@ function App() {
                 <ProfileEditForm values={{ setCurrentUser }} />
               </Route>
               <Route exact path="/signup">
-                <SignupForm register={register} errors={errors} setErrors={setErrors} />
+                <SignupForm
+                  register={register}
+                  errors={errors}
+                  setErrors={setErrors}
+                />
               </Route>
               <Route exact path="/muralSuggest">
                 <MuralSuggest suggest={suggest} />
@@ -135,8 +115,13 @@ function App() {
               <Route exact path="/login">
                 <LoginForm login={login} />
               </Route>
-              <Route exact path="/adminMurals" >
-                <AdminMurals suggestedMurals={suggestedMurals} setSuggestedMurals={setSuggestedMurals} deny={deny} approve={approve} />
+              <Route exact path="/adminMurals">
+                <AdminMurals
+                  suggestedMurals={suggestedMurals}
+                  setSuggestedMurals={setSuggestedMurals}
+                  deny={deny}
+                  approve={approve}
+                />
               </Route>
 
               <Route>

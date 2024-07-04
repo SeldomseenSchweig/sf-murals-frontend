@@ -5,7 +5,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 // const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?`
 
-
 /** API Class.
  *
  * Static class tying together methods used to get/send to to the API.
@@ -16,9 +15,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class sfMuralsApi {
   // the token for interactive with the API will be stored here.
-  //There are two routes the database and the SF Mural API 
+  //There are two routes the database and the SF Mural API
   static token;
-  
+
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
@@ -26,18 +25,13 @@ class sfMuralsApi {
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
 
-
     const headers = { Authorization: `Bearer ${sfMuralsApi.token}` };
-    const params = (method === "get")
-      ? data
-      : {};
+    const params = method === "get" ? data : {};
 
     try {
-       return (await axios({ url, method, data, params, headers })).data
+      return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
-      
-
-      if( !err.response.data) throw console.error("Something went wrong");
+      if (!err.response.data) throw console.error("Something went wrong");
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
@@ -48,19 +42,16 @@ class sfMuralsApi {
   /** Get details on a suggested murals. */
 
   static async getSuggestedMurals() {
-
-
     let res = await this.request(`murals/adminMurals`);
 
     return res;
   }
 
   static async getMurals(filter) {
-    let data = {}
-    console.log(filter)
+    let data = {};
+    console.log(filter);
     if (filter) {
-      data = { street_address: filter }
-
+      data = { street_address: filter };
     }
 
     let res = await this.request(`murals`, data);
@@ -68,19 +59,17 @@ class sfMuralsApi {
     return res;
   }
 
-
   // users suggest murals to add to site
 
   static async suggest(values) {
-
     let data = {
       artist: values.artist,
       street_address: values.street_address,
       img: values.img,
-      user_id: values.user_id
-    }
+      user_id: values.user_id,
+    };
 
-    let res = await this.request(`murals/muralSuggest`, data, 'post');
+    let res = await this.request(`murals/muralSuggest`, data, "post");
 
     return res;
   }
@@ -88,87 +77,65 @@ class sfMuralsApi {
   // admin denys suggested mural, deletes from suggestedMurals table
 
   static async deleteSuggested(id) {
-    let data = {}
+    let data = {};
 
-    await this.request(`murals/${id}`, data, 'delete')
+    await this.request(`murals/${id}`, data, "delete");
   }
 
   static async approve(values) {
-
     let data = {
       artist: values.artist,
       street_address: values.address,
       img: values.img,
+    };
 
-    }
-
-    let res = this.request('murals', data, 'post')
-    return res
+    let res = this.request("murals", data, "post");
+    return res;
   }
-
-
-
-
-
 
   /**register website */
 
   static async register(values) {
+    console.log(" This is the result: ===========", values);
     try {
-
       let data = {
         username: values.username,
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
-        email: values.email
-      }
-      let res = await this.request('auth/register', data, 'post')
-      return res
-      
+        email: values.email,
+      };
+      let res = await this.request("auth/register", data, "post");
+      console.log(res);
+
+      return res;
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-
-
   }
 
   /** login. */
 
   static async login({ username, password }) {
-
     let data = {
       username: username,
       password: password,
-    }
+    };
 
-    let res = await this.request('auth/token', data, 'post')
-    return res
-
+    let res = await this.request("auth/token", data, "post");
+    return res;
   }
 
   static async getUser(testuser) {
+    let res = this.request(`users/${testuser}`);
 
-    let res = this.request(`users/${testuser}`)
-
-    return res
-
+    return res;
   }
-
-
-
 
   static async update(username, data) {
-    let res = this.request(`users/${username}`, data, 'patch')
-    return res.user
-
-
-
+    let res = this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
-
-
 }
-
-
 
 export default sfMuralsApi;
